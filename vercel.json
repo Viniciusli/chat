@@ -1,5 +1,5 @@
 {
-    "version": "1",
+    "framework": null,
     "builds": [
         {
             "src": "./server.js",
