@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+
+    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="chat">
+        <input type="text" name="username" id="username" placeholder="Digite seu usuário">
+        <div class="messages"></div>
+        <input type="text" name="message" id="message" placeholder="Digite sua mensagem">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script type="text/javascript" type="module">
+        const socket = io();
+
+        console.log(socket);
+
+        function renderMessage(message) {
+            const messages = document.querySelector('.messages')
+            messages.innerHTML = messages.innerHTML + `
+                <div class="message"><strong>${message.author}:</strong> ${message.message}</div>
+            `
+        }
+
+        socket.on('recievedMessage', function(message) {
+            console.log(message);
+            renderMessage(message)
+        })
+
+        socket.on('previousMessages', function(messages) {
+            for (const message of messages) {
+                renderMessage(message)
+            }
+        })
+
+        document.getElementById('chat').addEventListener('submit', e => {
+            e.preventDefault()
+
+            const author = document.getElementById('username').value
+            const message = document.getElementById('message').value
+
+            if (author.length && message.length) {
+                socket.emit('sendMessage', {
+                    author,
+                    message,
+                })
+
+                renderMessage({
+                    author,
+                    message,
+                })
+            }
+        })
+    </script>
+</body>
+</html>
