@@ -18,7 +18,7 @@
     </form>
 
     <script type="text/javascript" type="module">
-        const socket = io();
+        const socket = io('http://localhost:3000');
 
         function renderMessage(message) {
             const messages = document.querySelector('.messages')
