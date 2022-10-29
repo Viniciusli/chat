@@ -28,4 +28,4 @@ io.on('connection', socket => {
     })
 })
 
-server.listen('https://chat-viniciusli.vercel.app/')
+server.listen(3000)

@@ -18,11 +18,7 @@
     </form>
 
     <script type="text/javascript" type="module">
-        const socket = io('https://chat-viniciusli.vercel.app/', {  
-        cors: {
-        origin: "https://chat-viniciusli.vercel.app/",
-        credentials: true
-      },transports : ['websocket'] });
+        const socket = io('', { transports : ['websocket'] });
 
         function renderMessage(message) {
             const messages = document.querySelector('.messages')
