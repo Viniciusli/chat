@@ -1,4 +1,3 @@
 {
-    "framework": null,
-    "buildCommand": "npm run start"
+    "framework": null
 }
