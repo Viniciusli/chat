@@ -18,7 +18,11 @@
     </form>
 
     <script type="text/javascript" type="module">
-        const socket = io('http://localhost:3000', { transports : ['websocket'] });
+        const socket = io('http://localhost:3000', {  
+        cors: {
+        origin: "http://localhost:5000",
+        credentials: true
+      },transports : ['websocket'] });
 
         function renderMessage(message) {
             const messages = document.querySelector('.messages')
