@@ -17,8 +17,12 @@
         <button type="submit">Enviar</button>
     </form>
 
-    <script type="text/javascript" type="module">
-        const socket = io('', { withCredentials: true, transports : ['websocket'] });
+    <script type="text/javascript">
+        const socket = io('', {transports : ['websocket'] });
+
+        socket.on('connect', function () {
+            console.log('connected!');
+        });
 
         function renderMessage(message) {
             const messages = document.querySelector('.messages')
